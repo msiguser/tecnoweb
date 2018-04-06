@@ -12,9 +12,9 @@
 
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -22,23 +22,36 @@
                 </button>
                 <a class="navbar-brand" href="/">Toma de decisiones</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ><a href="Index.html">Inicio</a></li>
-                    <li><a href="Login.html">Iniciar sesión</a></li>
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#">{{ user.get_username }}</a></li>
+                    <li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesióm</a></li>
+                {% else %}
+                    <li><a href="{% url 'login'%}?next={% url 'dashboard-init' %}">Iniciar sesión</a></li>
+                {% endif %}
                 </ul>
+
             </div>
         </div>
     </nav>
 
-    <div id="content">
+    <div class="container-fluid body-content">
         {% block content %}{% endblock %}
+
+        <hr />
+
+        <footer>
+            <p>&copy; 2018 - Grupo 7</p>
+        </footer>
+
     </div>
 
     <!-- jquery -->
     <script src="{% static "jquery/dist/jquery.js" %}"></script>
     <!-- bootstrap -->
     <script src="{% static "bootstrap/dist/js/bootstrap.js" %}"></script>
-
+    {% block scripts %}{% endblock %}
 </body>
 </html>
