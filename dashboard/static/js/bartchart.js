@@ -19,7 +19,7 @@ function CargaPlanesVendidos(data){
     yAxis: {
         min: 0,
         title: {
-            text: 'Population (millions)',
+            text: 'Poblacion (unidades)',
             align: 'high'
         },
         labels: {
@@ -27,7 +27,7 @@ function CargaPlanesVendidos(data){
         }
     },
     tooltip: {
-        valueSuffix: ' millions'
+        valueSuffix: ' unidades'
     },
     plotOptions: {
         bar: {
