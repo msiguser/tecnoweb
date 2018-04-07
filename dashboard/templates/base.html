@@ -27,7 +27,7 @@
                     <li><a href="{% url 'index' %}">Inicio</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="#">{{ user.get_username }}</a></li>
-                    <li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesióm</a></li>
+                    <li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesión</a></li>
                 {% else %}
                     <li><a href="{% url 'login'%}?next={% url 'dashboard-init' %}">Iniciar sesión</a></li>
                 {% endif %}
