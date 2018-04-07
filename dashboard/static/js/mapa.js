@@ -29,9 +29,9 @@ function CargaGraficos(lugar){
 	});
 	
 	if(!EsNulo(agenciaId)){
-        graficoBarrasHorizontal(agenciaId);
-		graficoBarras(agenciaId);
-		graficoManzana(agenciaId);
+        graficoBarrasHorizontalPorAgencia(agenciaId);
+		graficoBarrasPorAgencia(agenciaId);
+		graficoManzanaPorAgencia(agenciaId);
 	}
 	
 }
@@ -92,4 +92,8 @@ function InitMap() {
         	console.log('Error al carga agencias');
         }
     });
+
+	graficoBarrasHorizontal();
+	graficoBarras();
+	graficoManzana();
 }

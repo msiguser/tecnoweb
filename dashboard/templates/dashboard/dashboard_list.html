@@ -5,25 +5,38 @@
 
 <h1 class="page-header">Tablero de control</h1>
 
-<div class="row placeholders">
-    <div class="col-xs-6 placeholder">
-        <h4>Agencias</h4>
-        <div id="map"></div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Agencias</div>
+            <div class="panel-body">
+                <div id="map"></div>
+            </div>
+        </div>
     </div>
-    <div class="col-xs-6 placeholder">
-        <h4>Top 5 planes vendidos</h4>
-        <svg id='horBarChart'></svg>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Top 5 planes vendidos</div>
+            <div class="panel-body">
+                <div id="horBarChart"></div>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="row placeholders">
-    <div class="col-xs-6 placeholder">
-        <h4>Equipos preferidos</h4>
-        <svg id='myBarChart'></svg>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Equipos preferidos</div>
+            <div class="panel-body">
+                <div id="myBarChart"></div>
+            </div>
+        </div>
     </div>
-    <div class="col-xs-6 placeholder">
-        <h4>Estados de solicitudes</h4>
-        <svg id='myPieChart'></svg>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Estados de solicitudes</div>
+            <div class="panel-body">
+                <div id="myPieChart"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -34,8 +47,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcki-py3oiDlOlE4WvEoJCvARHx8SDi-o &callback=InitMap&libraries=places"
 async defer></script>
 <script src="{% static "js/mapa.js" %}" type="text/javascript"></script>
-<!-- D3js -->
-<script src="{% static "d3/d3.js" %}" type="text/javascript"></script>
+<!-- Highcharts -->
+<script src="{% static "highcharts/highcharts.js" %}" type="text/javascript"></script>
+<script src="{% static "highcharts/modules/exporting.js" %}"></script>
+<script src="{% static "highcharts/modules/export-data.js" %}"></script>
+<!-- Graficos -->
 <script src="{% static "js/bartchart.js" %}" type="text/javascript"></script>
 <script src="{% static "js/chart.js" %}" type="text/javascript"></script>
 <script src="{% static "js/canvas.js" %}" type="text/javascript"></script>

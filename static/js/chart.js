@@ -1,4 +1,60 @@
-function graficoBarras(agenciaid) {
+function CargarEquipos(data){
+
+    Highcharts.chart('myBarChart', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Equipos preferidos'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: ['Equipos'],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Unidades'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} unidad</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: data
+    });
+}
+
+function graficoBarras() {
+
+    var url = '/dashboard/equipospreferidos/';
+
+    $.ajax({
+        url: url,
+        type: 'get',
+        success: function(data) {
+            CargarEquipos(data);
+        },
+        failure: function(data) {
+            console.log('Error al cargar equipos preferidos');
+        }
+    });
+
+}
+function graficoBarrasPorAgencia(agenciaid) {
 
     var url = '/dashboard/agencia/' + agenciaid + '/equipospreferidos';
 
@@ -6,68 +62,10 @@ function graficoBarras(agenciaid) {
         url: url,
         type: 'get',
         success: function(data) {
-
-            var svgEle = $("#myBarChart");
-
-            svgEle.empty();
-
-            var svg = d3.select("#myBarChart"),
-            margin = {
-                top: 20,
-                right: 20,
-                bottom: 30,
-                left: 40
-            },
-            width = +svgEle.width() - margin.left - margin.right,
-            height = +svgEle.height() - margin.top - margin.bottom;
-
-            var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
-            y = d3.scaleLinear().rangeRound([height, 0]);
-
-            var g = svg.append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            x.domain(data.map(function (d) {
-                    return d.letter;
-                }));
-
-            y.domain([0, d3.max(data, function (d) {
-                        return d.frequency;
-                    })]);
-
-            g.append("g")
-                .attr("class", "axis axis--x")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
-
-            g.append("g")
-                .attr("class", "axis axis--y")
-                .call(d3.axisLeft(y).ticks(10, "%"))
-                .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", "0.71em")
-                .attr("text-anchor", "end")
-                .text("Frequency");
-
-            g.selectAll(".bar")
-                .data(data)
-                .enter().append("rect")
-                .attr("class", "bar")
-                .attr("x", function (d) {
-                    return x(d.letter);
-                })
-                .attr("y", function (d) {
-                    return y(d.frequency);
-                })
-                .attr("width", x.bandwidth())
-                .attr("height", function (d) {
-                    return height - y(d.frequency);
-                });
-
+            CargarEquipos(data);
         },
         failure: function(data) {
-            console.log('Error al cargar equipos preferidos');
+            console.log('Error al cargar equipos preferidos por agencia');
         }
     });
 }

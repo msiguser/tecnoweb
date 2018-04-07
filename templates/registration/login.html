@@ -4,56 +4,62 @@
 
 {% block content %}
 
-<h2>Iniciar sesión</h2>
+<h2></h2>
 
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <section id="loginForm">
-            <form action="{% url 'login' %}" class="form-horizontal" method="post" role="form">
 
-                {% csrf_token %}
+    <div class="col-md-5 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Iniciar sesión</h3>
+            </div>
+            <div class="panel-body">
+                <section id="loginForm">
+                    <form action="{% url 'login' %}" class="form-horizontal" method="post" role="form">
 
-                {% if form.errors %}
-                <div class="text-danger">Inicio de sesión no válido</div>
-                {% endif %}
+                        {% csrf_token %}
 
-                {% if next %}
-                    {% if user.is_authenticated %}
-                    <div class="text-danger">No tiene acceso a esta página</div>
-                    {% else %}
-                    <div class="text-danger">Por favor inicie sesión</div>
-                    {% endif %}
-                {% endif %}
+                        {% if form.errors %}
+                        <div class="text-danger">Inicio de sesión no válido</div>
+                        {% endif %}
 
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="id_username">Usuario:</label>
-                    <div class="col-md-10">
-                        <input class="form-control" id="id_username" name="username" type="text" value="" autofocus="" maxlength="254"/>
-                    </div>
-                </div>
+                        {% if next %}
+                            {% if user.is_authenticated %}
+                            <div class="text-danger">No tiene acceso a esta página</div>
+                            {% else %}
+                            <div class="text-danger"></div>
+                            {% endif %}
+                        {% endif %}
 
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="id_password">Contraseña</label>
-                    <div class="col-md-10">
-                        <input class="form-control" id="id_password" name="password" type="password" />
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="id_username">Usuario:</label>
+                            <div class="col-md-10">
+                                <input class="form-control" id="id_username" name="username" type="text" value="" autofocus="" maxlength="254"/>
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Iniciar sesión" class="btn btn-default" />
-                        <input type="hidden" name="next" value="{{ next }}" />
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="id_password">Contraseña</label>
+                            <div class="col-md-10">
+                                <input class="form-control" id="id_password" name="password" type="password" />
+                            </div>
+                        </div>
 
-                <p><a href="{% url 'password_reset' %}">¿Ha olvidado su contraseña?</a></p>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Iniciar sesión" class="btn btn-default" />
+                                <input type="hidden" name="next" value="{{ next }}" />
+                            </div>
+                        </div>
 
-            </form>
+                        <p><a href="{% url 'password_reset' %}">¿Ha olvidado su contraseña?</a></p>
 
-        </section>
+                    </form>
+
+                </section>
+            </div>
+        </div>
     </div>
-    <div class="col-md-2"></div>
 </div>
 
 {% endblock %}
